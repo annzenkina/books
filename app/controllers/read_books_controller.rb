@@ -15,7 +15,6 @@ class ReadBooksController < ApplicationController
       return
     end
 
-    @read_books = ReadBook.all
     @read_books = ReadBook.page(params[:page]).order(created_at: :desc)
   end
 
