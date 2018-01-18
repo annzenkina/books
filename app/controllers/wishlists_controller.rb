@@ -62,13 +62,7 @@ class WishlistsController < ApplicationController
   # DELETE /wishlists/1.json
   def destroy
     @wishlist.destroy
-    respond_to do |format|
-      format.html { redirect_to wishlists_url, notice: 'Wishlist was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-
-  # def add_to_read_books
-  # end
+    head :ok
 end
   private
     # Use callbacks to share common setup or constraints between actions.

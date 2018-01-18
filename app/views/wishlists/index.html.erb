@@ -62,7 +62,15 @@
     $(".js-wishlist-delete").click(function(event) {
       var bookId = $(this).data('book-id')
       if(confirm("Are you sure?")) {
-        window.location = "/read_books?read_book=" + bookId
+        if(confirm("Do you want to add this book to Read Books?")) {
+          $.ajax({
+            url: $(this).attr('href'),
+            method: 'DELETE',
+            success: function() {
+              window.location = "/read_books?read_book=" + bookId
+            }
+          })
+        }
       }
       return false
     })
