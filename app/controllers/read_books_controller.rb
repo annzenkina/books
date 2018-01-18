@@ -6,7 +6,6 @@ class ReadBooksController < ApplicationController
 
   def index
     if params[:read_book]
-      raise params.inspect
       if ReadBook.create(book_id: params[:read_book].to_s)
         notice = 'The read book was successfully added!'
       else
@@ -17,7 +16,7 @@ class ReadBooksController < ApplicationController
     end
 
     @read_books = ReadBook.all
-    @read_books = ReadBook.page(params[:page])
+    @read_books = ReadBook.page(params[:page]).order(created_at: :desc)
   end
 
   # GET /read_books/1
