@@ -1,0 +1,72 @@
+<p></p>
+<div class="container-fluid">
+  <form>
+    <div class="row">
+      <div class="col-md-3">
+        <select class="form-control js-book-search" name="wishlist">
+          <option value=""> - Add a new book to wishlist- </option>
+          <% @books.each do |book| %>
+            <option value = "<%=book.id%>"> <%= book.title %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-primary">Add to Wishlist</button>
+      </div>
+    </div>
+  </form>
+
+  <script>
+  $('.js-book-search').select2({
+    ajax: {
+      url: '/books/search',
+      dataType: 'json',
+    },
+    minimumInputLength: 3
+  });
+
+  </script>
+  <h1>Wishlist</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Title</th>
+        <th>Read?</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @wishlists.each do |wishlist| %>
+        <tr>
+          <td><%= wishlist.book_id %></td>
+          <td><%= wishlist.book.title %></td>
+          <td><input type="checkbox" name="read_or_not" <% if wishlist.read_or_not %> checked <% end %>> <%= wishlist.read_or_not_func%></input></td>
+          <td><%= link_to 'Edit', edit_wishlist_path(wishlist), class: "btn btn-default" %>
+          <%= link_to 'Destroy', wishlist, method: :delete, class: "js-wishlist-delete btn btn-danger", data: { book_id: wishlist.book_id } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Wishlist', new_wishlist_path %>
+  <br>
+  <p id="notice"><%= notice %></p>
+  <br>
+
+
+  <script>
+  $(document).ready(function() {
+    $(".js-wishlist-delete").click(function(event) {
+      var bookId = $(this).data('book-id')
+      if(confirm("Are you sure?")) {
+        window.location = "/read_books?read_book=" + bookId
+      }
+      return false
+    })
+  })
+
+  </script>
+</div>

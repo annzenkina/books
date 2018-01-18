@@ -1,0 +1,65 @@
+<p></p>
+<div class="container-fluid">
+
+  <%= form_with(model: ReadBook.new, local: true) do |form|%>
+    <div class="row">
+      <div class="col-md-3">
+        <%= form.select(:book_id, [["Select a book", ""]], {}, class: "form-control js-book-search") %>
+      </div>
+      <div class="col-md-3">
+        <%= form.submit "Create Read Book",  class: "btn btn-primary" %>
+        <!-- <button class="btn btn-success" type="submit">Submit</button> -->
+      </div>
+    </div>
+  <% end %>
+
+<% if flash[:notice] %>
+  <div id="notice" class="alert alert-success"><%= flash[:notice] %></div>
+<% end %>
+
+<% if flash[:warning] %>
+  <div id="notice" class="alert alert-warning"><%= flash[:warning] %></div>
+<% end %>
+
+
+  <script>
+  $('.js-book-search').select2({
+    ajax: {
+      url: '/books/search',
+      dataType: 'json',
+    },
+    minimumInputLength: 3
+  });
+  </script>
+
+  <h1>Read Books</h1>
+
+  <table  class="table table-condensed">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Year Of Publication</th>
+        <th>Date of Reading</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @read_books.each do |read_book| %>
+        <tr>
+          <td><%= read_book.book_id %></td>
+          <td><%= read_book.book.title %></td>
+          <td><%= read_book.book.year %></td>
+          <td><%= read_book.read_date %></td>
+          <td><%= link_to 'Edit', edit_read_book_path(read_book), class: "btn btn-default" %>
+          <%= link_to 'Destroy', read_book, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Read Book', new_read_book_path %>
+  </br>
+  <nav aria-label="Page navigation"><%= paginate @read_books %> </nav>
+  </br>
+</div>

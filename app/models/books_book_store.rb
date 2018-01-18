@@ -1,0 +1,2 @@
+class BooksBookStore < ApplicationRecord
+end

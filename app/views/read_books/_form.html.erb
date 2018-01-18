@@ -1,0 +1,29 @@
+<div class="row">
+<div class="col-md-4">
+
+<%= form_with(model: read_book, local: true) do |form| %>
+  <% if read_book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(read_book.errors.count, "error") %> prohibited this read_book from being saved:</h2>
+
+      <ul>
+      <% read_book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :book_id, "Book ISBN" %>
+      <%= form.text_field :book_id, id: :read_book_book_id, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  </div>
+
+<% end %>
