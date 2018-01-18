@@ -43,7 +43,7 @@
         <tr>
           <td><%= wishlist.book_id %></td>
           <td><%= wishlist.book.title %></td>
-          <td><input type="checkbox" name="read_or_not" <% if wishlist.read_or_not %> checked <% end %>> <%= wishlist.read_or_not_func%></input></td>
+          <td><input type="checkbox" disabled="true" name="read_or_not" <% if wishlist.read_or_not %> checked <% end %>> <%= wishlist.read_or_not_func%></input></td>
           <td><%= link_to 'Edit', edit_wishlist_path(wishlist), class: "btn btn-default" %>
           <%= link_to 'Destroy', wishlist, method: :delete, class: "js-wishlist-delete btn btn-danger", data: { book_id: wishlist.book_id } %></td>
         </tr>
