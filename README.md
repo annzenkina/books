@@ -17,4 +17,4 @@ I used gem "Kaminari" for pagination.
 
 ## Preview
 
-![preview/preview.gif]()
+![Preview](/preview/preview.gif)
