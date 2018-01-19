@@ -15,6 +15,6 @@ There are three tabs in the app:
 
 I used gem "Kaminari" for pagination.
 
-TODO:
+## Preview
 
-* make the form POST
+![Preview](/preview/preview.gif)
