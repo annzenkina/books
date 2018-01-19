@@ -8,18 +8,9 @@ class ReadBooksController < ApplicationController
     @read_books = ReadBook.page(params[:page]).order(created_at: :desc)
   end
 
-  # GET /read_books/1
-  # GET /read_books/1.json
-  def show
-  end
-
   # GET /read_books/new
   def new
     @read_book = ReadBook.new
-  end
-
-  # GET /read_books/1/edit
-  def edit
   end
 
   # POST /read_books
