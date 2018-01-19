@@ -5,16 +5,6 @@ class ReadBooksController < ApplicationController
   # GET /read_books.json
 
   def index
-    if params[:read_book]
-      if ReadBook.create(book_id: params[:read_book].to_s)
-        notice = 'The read book was successfully added!'
-      else
-        notice = "Not created"
-      end
-      redirect_to read_books_url, notice: notice
-      return
-    end
-
     @read_books = ReadBook.page(params[:page]).order(created_at: :desc)
   end
 

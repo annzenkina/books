@@ -62,15 +62,23 @@
     $(".js-wishlist-delete").click(function(event) {
       var bookId = $(this).data('book-id')
       if(confirm("Are you sure?")) {
-        if(confirm("Do you want to add this book to Read Books?")) {
-          $.ajax({
-            url: $(this).attr('href'),
-            method: 'DELETE',
-            success: function() {
-              window.location = "/read_books?read_book=" + bookId
+        $.ajax({
+          url: $(this).attr('href'),
+          method: 'DELETE',
+          success: function() {
+            if(confirm("Do you want to add this book to Read Books?")) {
+              $.ajax({
+                url: "/read_books.json",
+                method: 'POST',
+                data: { read_book: { book_id: bookId }},
+                success: function() {
+                  window.location = "/read_books"
+                }
+              });
             }
-          })
-        }
+            window.location = "/wishlists";
+          }
+        });
       }
       return false
     })
